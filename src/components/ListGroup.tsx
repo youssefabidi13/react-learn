@@ -1,12 +1,16 @@
 import { useState } from "react";
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
 
-function ListGroup() {
-  let items = ["New York", "Los Angeles", "Chicago", "Houston", "Philadelphia"];
+function ListGroup({ items, heading, onSelectItem }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const message = items.length === 0 && <p>There are no items in the list</p>;
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {message}
       <ul className="list-group">
         {items.map((item, index) => (
@@ -19,6 +23,7 @@ function ListGroup() {
             key={item}
             onClick={() => {
               setSelectedIndex(index);
+              onSelectItem(item);
             }}
           >
             {item}
