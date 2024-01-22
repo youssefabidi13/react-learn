@@ -1,17 +1,16 @@
-import ListGroup from "./components/ListGroup";
-function App() {
-  let items = ["New York", "Los Angeles", "Chicago", "Houston", "Philadelphia"];
-  const handelSelectItem = (item: string) => {
-    console.log(item);
-  };
+import Alert from "./components/Alert";
+import Button from "./components/Button";
 
+function App() {
+  const handleClick = () => {
+    console.log("Hello, world!");
+  };
   return (
     <div>
-      <ListGroup
-        items={items}
-        heading="Cities"
-        onSelectItem={handelSelectItem}
-      />
+      {/* <Alert>
+        Hello, <span>world!</span>
+      </Alert> */}
+      <Button onClick={handleClick}>My Button</Button>
     </div>
   );
 }

@@ -1,3 +1,4 @@
   npm create vite@4.1.0 choose name project choose typescrypt
   npm install
   npm run dev
+  rafce //react arrow function component with export
