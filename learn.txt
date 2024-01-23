@@ -3,3 +3,6 @@
   npm run dev
   rafce //react arrow function component with export
   npm i styled-components //css in js
+  daisyui //tailwindcss
+  chakra-ui //tailwindcss
+  npm i react-icons@4.7.1
