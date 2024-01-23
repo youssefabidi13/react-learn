@@ -2,3 +2,4 @@
   npm install
   npm run dev
   rafce //react arrow function component with export
+  npm i styled-components //css in js
