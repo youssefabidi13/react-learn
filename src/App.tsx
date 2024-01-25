@@ -38,7 +38,10 @@ function App() {
     //setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
     setBugs(
       produce((draft) => {
-        draft[0].fixed = true;
+        const bug = draft.find((bug) => bug.id === 1);
+        if (bug) {
+          bug.fixed = true;
+        }
       })
     );
   };
@@ -57,6 +60,7 @@ function App() {
         onSelectItem={handleSelectItem}
       /> */}
       {/* <BiBulb color="red" /> */}
+      <button onClick={handleClick}>Fix Bug</button>
     </div>
   );
 }
