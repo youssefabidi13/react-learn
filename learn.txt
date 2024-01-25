@@ -6,3 +6,4 @@
   daisyui //tailwindcss
   chakra-ui //tailwindcss
   npm i react-icons@4.7.1
+  npm i immer@9.0.19 //immutable state management
