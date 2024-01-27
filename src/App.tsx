@@ -7,6 +7,7 @@ import produce from "immer";
 import { set } from "immer/dist/internal";
 import NavBar from "./components/navbar";
 import Cart from "./components/Cart";
+import Form from "./components/Form";
 function App() {
   // const handleClick = () => {
   //   setAlertVisibility(true);
@@ -47,7 +48,7 @@ function App() {
   //     })
   //   );
   // };
-  const [cartItems, setCartItems] = useState(["Product 1", "Product 2"]);
+  // const [cartItems, setCartItems] = useState(["Product 1", "Product 2"]);
   return (
     <div>
       {/* <Alert>
@@ -69,8 +70,9 @@ function App() {
         </p>
       ))}
       <button onClick={handleClick}>Fix Bug</button> */}
-      <NavBar cartItemsCount={cartItems.length} />
-      <Cart cartItems={cartItems} onClear={() => setCartItems([])} />
+      {/* <NavBar cartItemsCount={cartItems.length} />
+      <Cart cartItems={cartItems} onClear={() => setCartItems([])} /> */}
+      <Form />
     </div>
   );
 }
