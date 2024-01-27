@@ -8,3 +8,5 @@
   npm i react-icons@4.7.1
   npm i immer@9.0.19 //immutable state management
   npm i react-hook-form@7.43//form validation
+  npm i zod@3.20.6 //form validation schema builder for typescript
+  npm i @hookform/resolvers@2.9.11 //form validation resolver for react-hook-form
