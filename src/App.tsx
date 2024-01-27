@@ -5,10 +5,37 @@ import ListGroup from "./components/ListGroup";
 import { BiBulb } from "react-icons/bi";
 import produce from "immer";
 import { set } from "immer/dist/internal";
-import NavBar from "./components/navbar";
 import Cart from "./components/Cart";
 import Form from "./components/Form";
+import ExpenseList from "./components/expense-tracker/components/ExpenseList";
+import ExpenseFilter from "./components/expense-tracker/components/ExpenseFilter";
+import ExpenseForm from "./components/expense-tracker/components/ExpenseForm";
+import categories from "./components/expense-tracker/components/categories";
 function App() {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [expenses, setExpenses] = useState([
+    {
+      id: 1,
+      description: "Buy a book",
+      amount: 20,
+      category: "Entertainment",
+    },
+    {
+      id: 2,
+      description: "Buy a milk",
+      amount: 5,
+      category: "Groceries",
+    },
+    {
+      id: 3,
+      description: "Buy a car",
+      amount: 20000,
+      category: "Utilities",
+    },
+  ]);
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((expense) => expense.category === selectedCategory)
+    : expenses;
   // const handleClick = () => {
   //   setAlertVisibility(true);
   // };
@@ -51,6 +78,20 @@ function App() {
   // const [cartItems, setCartItems] = useState(["Product 1", "Product 2"]);
   return (
     <div>
+      <div className="mb-5">
+        <ExpenseForm
+          onSubmit={(expense) =>
+            setExpenses([...expenses, { ...expense, id: expenses.length + 1 }])
+          }
+        />
+      </div>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(category) =>
+            console.log(setSelectedCategory(category))
+          }
+        />
+      </div>
       {/* <Alert>
         Hello, <span>world!</span>
       </Alert> */}
@@ -72,7 +113,13 @@ function App() {
       <button onClick={handleClick}>Fix Bug</button> */}
       {/* <NavBar cartItemsCount={cartItems.length} />
       <Cart cartItems={cartItems} onClear={() => setCartItems([])} /> */}
-      <Form />
+      {/* <Form /> */}
+      <ExpenseList
+        expenses={visibleExpenses}
+        onDelete={(id) =>
+          setExpenses(expenses.filter((expense) => expense.id !== id))
+        }
+      />
     </div>
   );
 }
