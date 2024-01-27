@@ -3,11 +3,13 @@ import React, { HtmlHTMLAttributes, useRef } from "react";
 const Form = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
+  const person = { name: "", age: 0 };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (nameRef.current && ageRef.current) {
-      console.log(nameRef.current.value);
-      console.log(ageRef.current.value);
+      person.name = nameRef.current.value;
+      person.age = ageRef.current.valueAsNumber;
+      console.log(person);
     }
   };
   return (
