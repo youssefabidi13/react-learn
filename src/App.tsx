@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import ListGroup from "./components/ListGroup";
@@ -11,31 +11,45 @@ import ExpenseList from "./components/expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./components/expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./components/expense-tracker/components/ExpenseForm";
 import categories from "./components/expense-tracker/components/categories";
+import ProductList from "./components/ProductList";
+
+const connect = () => {
+  console.log("connect");
+};
+const disconnect = () => {
+  console.log("disconnect");
+};
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [expenses, setExpenses] = useState([
-    {
-      id: 1,
-      description: "Buy a book",
-      amount: 20,
-      category: "Entertainment",
-    },
-    {
-      id: 2,
-      description: "Buy a milk",
-      amount: 5,
-      category: "Groceries",
-    },
-    {
-      id: 3,
-      description: "Buy a car",
-      amount: 20000,
-      category: "Utilities",
-    },
-  ]);
-  const visibleExpenses = selectedCategory
-    ? expenses.filter((expense) => expense.category === selectedCategory)
-    : expenses;
+  useEffect(() => {
+    connect();
+    return () => {
+      disconnect();
+    };
+  });
+  // const [selectedCategory, setSelectedCategory] = useState("");
+  // const [expenses, setExpenses] = useState([
+  //   {
+  //     id: 1,
+  //     description: "Buy a book",
+  //     amount: 20,
+  //     category: "Entertainment",
+  //   },
+  //   {
+  //     id: 2,
+  //     description: "Buy a milk",
+  //     amount: 5,
+  //     category: "Groceries",
+  //   },
+  //   {
+  //     id: 3,
+  //     description: "Buy a car",
+  //     amount: 20000,
+  //     category: "Utilities",
+  //   },
+  // ]);
+  // const visibleExpenses = selectedCategory
+  //   ? expenses.filter((expense) => expense.category === selectedCategory)
+  //   : expenses;
   // const handleClick = () => {
   //   setAlertVisibility(true);
   // };
@@ -76,9 +90,10 @@ function App() {
   //   );
   // };
   // const [cartItems, setCartItems] = useState(["Product 1", "Product 2"]);
+  // const [category, setCategory] = useState("");
   return (
     <div>
-      <div className="mb-5">
+      {/* <div className="mb-5">
         <ExpenseForm
           onSubmit={(expense) =>
             setExpenses([...expenses, { ...expense, id: expenses.length + 1 }])
@@ -91,7 +106,7 @@ function App() {
             console.log(setSelectedCategory(category))
           }
         />
-      </div>
+      </div> */}
       {/* <Alert>
         Hello, <span>world!</span>
       </Alert> */}
@@ -114,12 +129,21 @@ function App() {
       {/* <NavBar cartItemsCount={cartItems.length} />
       <Cart cartItems={cartItems} onClear={() => setCartItems([])} /> */}
       {/* <Form /> */}
-      <ExpenseList
+      {/* <ExpenseList
         expenses={visibleExpenses}
         onDelete={(id) =>
           setExpenses(expenses.filter((expense) => expense.id !== id))
         }
-      />
+      /> */}
+      {/* <select
+        className="form-select"
+        onChange={(event) => setCategory(event.target.value)}
+      >
+        <option value="">All categories</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Household">HouseHold</option>
+      </select>
+      <ProductList category={category} /> */}
     </div>
   );
 }

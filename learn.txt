@@ -10,3 +10,5 @@
   npm i react-hook-form@7.43//form validation
   npm i zod@3.20.6 //form validation schema builder for typescript
   npm i @hookform/resolvers@2.9.11 //form validation resolver for react-hook-form
+  jsonplaceholder.typicode.com //fake api
+  npm i axios@1.3.4 //http request
