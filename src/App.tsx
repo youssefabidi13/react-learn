@@ -4,7 +4,7 @@ import Button from "./components/Button";
 import ListGroup from "./components/ListGroup";
 import { BiBulb } from "react-icons/bi";
 import produce from "immer";
-import { set } from "immer/dist/internal";
+import { is, set } from "immer/dist/internal";
 import Cart from "./components/Cart";
 import Form from "./components/Form";
 import ExpenseList from "./components/expense-tracker/components/ExpenseList";
@@ -12,20 +12,54 @@ import ExpenseFilter from "./components/expense-tracker/components/ExpenseFilter
 import ExpenseForm from "./components/expense-tracker/components/ExpenseForm";
 import categories from "./components/expense-tracker/components/categories";
 import ProductList from "./components/ProductList";
+import axios, { Axios, AxiosError, CanceledError } from "axios";
 
-const connect = () => {
-  console.log("connect");
-};
-const disconnect = () => {
-  console.log("disconnect");
-};
+// const connect = () => {
+//   console.log("connect");
+// };
+// const disconnect = () => {
+//   console.log("disconnect");
+// };
+interface User {
+  id: number;
+  name: string;
+}
 function App() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
+
   useEffect(() => {
-    connect();
+    // try {
+    //   const fetchUsers = async () => {
+    //     const res = await axios.get(
+    //       "https://jsonplaceholder.typicode.com/users"
+    //     );
+    //     setUsers(res.data);
+    //   };
+    //   fetchUsers();
+    // } catch (err) {
+    //   setError((err as AxiosError).message);
+    // }
+    const controller = new AbortController();
+    setLoading(true);
+    axios
+      .get("https://jsonplaceholder.typicode.com/users", {
+        signal: controller.signal,
+      })
+      .then((res) => {
+        setUsers(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+        setLoading(false);
+      });
     return () => {
-      disconnect();
+      controller.abort();
     };
-  });
+  }, []);
   // const [selectedCategory, setSelectedCategory] = useState("");
   // const [expenses, setExpenses] = useState([
   //   {
@@ -92,7 +126,7 @@ function App() {
   // const [cartItems, setCartItems] = useState(["Product 1", "Product 2"]);
   // const [category, setCategory] = useState("");
   return (
-    <div>
+    <>
       {/* <div className="mb-5">
         <ExpenseForm
           onSubmit={(expense) =>
@@ -144,7 +178,14 @@ function App() {
         <option value="Household">HouseHold</option>
       </select>
       <ProductList category={category} /> */}
-    </div>
+      {error && <p>{error}</p>}
+      {isLoading && <div className="spinner-border"></div>}
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </>
   );
 }
 export default App;
